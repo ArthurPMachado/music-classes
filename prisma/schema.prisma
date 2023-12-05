@@ -11,10 +11,14 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  name     String
-  email    String @unique
-  password String
+  id             String  @id @default(uuid())
+  name           String
+  email          String  @unique
+  password       String
+  phone          String?
+  age            Int?
+  is_admin       Boolean
+  has_permission Boolean
 
   @@map("users")
 }
