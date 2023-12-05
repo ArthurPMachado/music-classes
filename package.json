@@ -37,6 +37,7 @@
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/express": "^4.17.13",
     "@types/node": "^16.0.0",
+    "@types/passport-jwt": "^3.0.13",
     "eslint": "^8.53.0",
     "prisma": "^5.6.0",
     "source-map-support": "^0.5.20",
