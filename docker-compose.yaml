@@ -10,3 +10,6 @@ services:
       POSTGRES_USER: arthur
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: aulas-musica
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
