@@ -10,7 +10,7 @@ import { PrismaService } from '@/prisma/prisma.service'
 import {
   CreateAccountSchema,
   createAccountSchema,
-} from '@/schemas/create-account.schema'
+} from '@/schemas/create-account-schema'
 import { hash } from 'bcryptjs'
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
 
