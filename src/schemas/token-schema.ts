@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
-export const tokenSchema = z.object({
+export const tokenPayload = z.object({
   sub: z.string().uuid(),
 })
 
-export type TokenSchema = z.infer<typeof tokenSchema>
+export type TokenPayload = z.infer<typeof tokenPayload>
