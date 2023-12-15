@@ -5,7 +5,7 @@ import { PrismaService } from '@/prisma/prisma.service'
 import { AppModule } from '@/app.module'
 import { JwtService } from '@nestjs/jwt'
 
-describe('Fetch Accounts (E2E)', () => {
+describe('Get Account (E2E)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService
@@ -23,7 +23,7 @@ describe('Fetch Accounts (E2E)', () => {
     await app.init()
   })
 
-  test('[GET] /accounts', async () => {
+  test('[GET] /accounts/:id', async () => {
     const user = await prisma.user.create({
       data: {
         name: 'test',
@@ -36,31 +36,12 @@ describe('Fetch Accounts (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id })
 
-    await prisma.user.createMany({
-      data: [
-        {
-          name: 'test2',
-          email: 'test2@example.com',
-          password: '123456',
-          has_permission: false,
-          is_admin: false,
-        },
-        {
-          name: 'test3',
-          email: 'test3@example.com',
-          password: '123456',
-          has_permission: false,
-          is_admin: false,
-        },
-      ],
-    })
-
     const response = await request(app.getHttpServer())
-      .get('/accounts')
+      .get(`/accounts/${user.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
     expect(response.statusCode).toBe(200)
-    expect(response.body.accounts.length).toEqual(3)
+    expect(response.body.account.name).toEqual('test')
   })
 })
