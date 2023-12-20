@@ -7,6 +7,7 @@ import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
 import { FetchAccountsController } from './controllers/fetch-accounts.controller'
 import { GetAccountController } from './controllers/get-account.controller'
+import { GetUsersMetricsController } from './controllers/get-users-metrics.controller'
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { GetAccountController } from './controllers/get-account.controller'
     CreateAccountController,
     FetchAccountsController,
     GetAccountController,
+    GetUsersMetricsController,
   ],
   providers: [PrismaService],
 })
