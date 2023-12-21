@@ -1,5 +1,5 @@
-import { TokenPayload } from '@/schemas/token-schema'
 import { ExecutionContext, createParamDecorator } from '@nestjs/common'
+import { TokenPayload } from '@/schemas/token-schema'
 
 export const CurrentUser = createParamDecorator(
   (_: never, context: ExecutionContext) => {
