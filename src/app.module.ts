@@ -9,6 +9,7 @@ import { FetchAccountsController } from './controllers/fetch-accounts.controller
 import { GetAccountController } from './controllers/get-account.controller'
 import { GetUsersMetricsController } from './controllers/get-users-metrics.controller'
 import { ChangeAccountPermissionController } from './controllers/change-account-permission.controller'
+import { DeleteAccountController } from './controllers/delete-account.controller'
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ChangeAccountPermissionController } from './controllers/change-account-
     GetAccountController,
     GetUsersMetricsController,
     ChangeAccountPermissionController,
+    DeleteAccountController,
   ],
   providers: [PrismaService],
 })
