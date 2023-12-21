@@ -10,7 +10,7 @@ import { GetAccountController } from './controllers/get-account.controller'
 import { GetUsersMetricsController } from './controllers/get-users-metrics.controller'
 import { EditAccountPermissionController } from './controllers/edit-account-permission.controller'
 import { DeleteAccountController } from './controllers/delete-account.controller'
-import { UpdateAccountDataController } from './controllers/update-account-data.controller'
+import { EditAccountDataController } from './controllers/edit-account-data.controller'
 
 @Module({
   imports: [
@@ -28,7 +28,7 @@ import { UpdateAccountDataController } from './controllers/update-account-data.c
     GetUsersMetricsController,
     EditAccountPermissionController,
     DeleteAccountController,
-    UpdateAccountDataController,
+    EditAccountDataController,
   ],
   providers: [PrismaService],
 })

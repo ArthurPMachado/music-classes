@@ -5,7 +5,7 @@ import { PrismaService } from '@/prisma/prisma.service'
 import { AppModule } from '@/app.module'
 import { JwtService } from '@nestjs/jwt'
 
-describe('Change account permission (E2E)', () => {
+describe('Edit account permission (E2E)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService

@@ -9,24 +9,24 @@ import {
 import { PrismaService } from '@/prisma/prisma.service'
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
 import {
-  UpdateAccountBodySchema,
-  updateAccountBodySchema,
+  EditAccountBodySchema,
+  editAccountBodySchema,
 } from '@/schemas/update-account-body-schema'
 import { GetDataById } from '@/schemas/get-data-by-id-schema'
 
-const bodyValidationPipe = new ZodValidationPipe(updateAccountBodySchema)
+const bodyValidationPipe = new ZodValidationPipe(editAccountBodySchema)
 
 @Controller('/accounts/:id')
-export class UpdateAccountDataController {
+export class EditAccountDataController {
   constructor(private prisma: PrismaService) {}
 
   @Put()
   @HttpCode(204)
   async handle(
     @Param('id') id: GetDataById,
-    @Body(bodyValidationPipe) body: UpdateAccountBodySchema,
+    @Body(bodyValidationPipe) body: EditAccountBodySchema,
   ) {
-    const bodyWithoutSomeFields: UpdateAccountBodySchema = {
+    const bodyWithoutSomeFields: EditAccountBodySchema = {
       name: body.name,
       email: body.email,
       age: body.age,
