@@ -10,6 +10,7 @@ import {
   BadRequestException,
   Controller,
   HttpCode,
+  NotFoundException,
   Param,
   Patch,
   UseGuards,
@@ -30,8 +31,6 @@ export class ChangeAccountPermissionController {
   ) {
     const regexPattern = /^(true|false|1|0)$/i
 
-    console.log(status)
-
     const isOfTypeBoolean = regexPattern.test(status)
 
     if (!isOfTypeBoolean) {
@@ -41,13 +40,17 @@ export class ChangeAccountPermissionController {
     // convert string to boolean and maintain it's value
     const parsedStatus = JSON.parse(status)
 
-    await this.prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        has_permission: parsedStatus,
-      },
-    })
+    try {
+      await this.prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          has_permission: parsedStatus,
+        },
+      })
+    } catch (error) {
+      throw new NotFoundException('User does not exists')
+    }
   }
 }
