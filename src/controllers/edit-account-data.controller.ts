@@ -11,7 +11,7 @@ import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
 import {
   EditAccountBodySchema,
   editAccountBodySchema,
-} from '@/schemas/update-account-body-schema'
+} from '@/schemas/edit-account-body-schema'
 import { GetDataById } from '@/schemas/get-data-by-id-schema'
 
 const bodyValidationPipe = new ZodValidationPipe(editAccountBodySchema)
