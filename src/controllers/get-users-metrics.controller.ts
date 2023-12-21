@@ -7,7 +7,7 @@ import { Controller, Get, UseGuards } from '@nestjs/common'
 export class GetUsersMetricsController {
   constructor(private prisma: PrismaService) {}
 
-  @Get('')
+  @Get()
   async handle() {
     const numberOfUsers = await this.prisma.user.count()
     const numberOfUsersThatHavePermissions = await this.prisma.user.count({

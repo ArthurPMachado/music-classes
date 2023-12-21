@@ -12,7 +12,7 @@ import { Controller, Get, Query, UseGuards, UsePipes } from '@nestjs/common'
 export class FetchAccountsController {
   constructor(private prisma: PrismaService) {}
 
-  @Get('/')
+  @Get()
   @UsePipes(new ZodValidationPipe(pageQueryParamSchema))
   async handle(@Query('page') page: PageQueryParamSchema) {
     const perPage = 20
