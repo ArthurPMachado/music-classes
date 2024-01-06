@@ -25,7 +25,7 @@ To run this project, it's necessary to prepare your environment, which means:
 ### Installing
 **Cloning the Repository**
 ```
-$ git clone git@github.com:ArthurPMachado/plataforma-aulas-musica.git
+$ git clone https://github.com/ArthurPMachado/plataforma-aulas-musica.git
 
 $ cd plataforma-aulas-musica
 ```
