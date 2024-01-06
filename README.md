@@ -8,7 +8,7 @@ to learn how to play, with the possibility to learn different instruments and wi
 ## Technologies used
 
 * NodeJS
-* Nest
+* NestJS
 * Prisma
 * JWT
 * Vitest + Supertest
