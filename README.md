@@ -46,6 +46,12 @@ _or_
 ```
 $ pnpm run start:prod
 ```
+**To run prod, is necessary to build first using:**
+
+```
+$ pnpm run build,
+```
+
 
 ### Running Tests
 **Unit tests (under development)**
