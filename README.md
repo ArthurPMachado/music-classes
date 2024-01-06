@@ -1,4 +1,4 @@
-# Education Music Platform with Nest, Prisma and Docker
+# Education Music Platform
 
 ## A Nest application to help beginners to learn how to play a instrument
 
