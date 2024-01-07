@@ -11,6 +11,7 @@ to learn how to play, with the possibility to learn different instruments and wi
 * NestJS
 * Prisma
 * Docker
+* PostgreSQL
 * JWT
 * Vitest + Supertest
 * Zod
