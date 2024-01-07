@@ -10,6 +10,7 @@ to learn how to play, with the possibility to learn different instruments and wi
 * NodeJS
 * NestJS
 * Prisma
+* Docker
 * JWT
 * Vitest + Supertest
 * Zod
