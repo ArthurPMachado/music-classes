@@ -1,9 +1,9 @@
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import { PrismaService } from '@/infra/prisma/prisma.service'
 import {
   authenticateBodySchema,
   AuthenticateBodySchema,
-} from '@/schemas/authenticate-body-schema'
+} from '@/infra/http/schemas/authenticate-body-schema'
 import {
   Body,
   Controller,

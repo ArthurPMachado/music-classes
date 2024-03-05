@@ -1,11 +1,11 @@
-import { JwtAuthGuard } from '@/auth/jwt-auth.guard'
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
+import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import { PrismaService } from '@/infra/prisma/prisma.service'
 import {
   EditAccountPermissionSchema,
   editAccountPermissionSchema,
-} from '@/schemas/edit-account-permission-schema'
-import { GetDataById } from '@/schemas/get-data-by-id-schema'
+} from '@/infra/http/schemas/edit-account-permission-schema'
+import { GetDataById } from '@/infra/http/schemas/get-data-by-id-schema'
 import {
   Controller,
   HttpCode,
