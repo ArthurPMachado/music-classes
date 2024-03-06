@@ -2,11 +2,13 @@ version: '3.8'
 
 services:
   postgres:
-    container_name: plataforma-aulas-musica
+    container_name: music-classes-pg
     image: bitnami/postgresql
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: arthur
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: aulas-musica
+      POSTGRES_DB: music-classes
+
+#TODO: Secure user and password variables

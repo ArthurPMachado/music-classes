@@ -10,15 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  ADMIN
+  STUDENT
+}
+
 model User {
-  id             String  @id @default(uuid())
-  name           String
-  email          String  @unique
-  password       String
-  phone          String?
-  age            Int?
-  is_admin       Boolean
-  has_permission Boolean
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  phone    String?
+  age      Int?
+  role     UserRole @default(STUDENT)
 
   @@map("users")
 }
