@@ -1,6 +1,6 @@
-import { Entity } from '@/core/entity'
+import { Entity } from '@/core/entities/entity'
 import { IUserProps } from './interfaces/IUserProps'
-import { UniqueEntityID } from '@/core/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 export class Student extends Entity<IUserProps> {
   static create(props: IUserProps, id?: UniqueEntityID) {
