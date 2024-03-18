@@ -4,5 +4,5 @@ export interface IUserProps {
   password: string
   phone?: string | null
   age?: number | null
-  role: string
+  role?: string
 }
