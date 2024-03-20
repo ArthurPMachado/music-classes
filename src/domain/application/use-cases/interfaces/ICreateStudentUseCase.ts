@@ -1,4 +1,6 @@
+import { Either } from '@/core/either'
 import { Student } from '@/domain/enterprise/entities/student'
+import { StudentAlreadyExists } from '../errors/student-already-exists'
 
 export interface ICreateStudentUseCaseRequest {
   name: string
@@ -6,6 +8,9 @@ export interface ICreateStudentUseCaseRequest {
   password: string
 }
 
-export interface ICreateStudentUseCaseResponse {
-  student: Student
-}
+export type ICreateStudentUseCaseResponse = Either<
+  StudentAlreadyExists,
+  {
+    student: Student
+  }
+>

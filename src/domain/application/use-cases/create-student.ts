@@ -4,6 +4,8 @@ import {
   ICreateStudentUseCaseRequest,
   ICreateStudentUseCaseResponse,
 } from './interfaces/ICreateStudentUseCase'
+import { left, right } from '@/core/either'
+import { StudentAlreadyExists } from './errors/student-already-exists'
 
 export class CreateStudent {
   constructor(private studentsRepository: IStudentsRepository) {}
@@ -17,7 +19,7 @@ export class CreateStudent {
       await this.studentsRepository.findByEmail(email)
 
     if (studentWithSameEmail) {
-      throw new Error('Student already exists')
+      return left(new StudentAlreadyExists(email))
     }
 
     const student = Student.create({
@@ -28,8 +30,8 @@ export class CreateStudent {
 
     await this.studentsRepository.create(student)
 
-    return {
+    return right({
       student,
-    }
+    })
   }
 }
