@@ -7,8 +7,10 @@ import {
 import { left, right } from '@/core/either'
 import { StudentAlreadyExistsError } from './errors/student-already-exists-error'
 import { HashGenerator } from '../cryptography/hash-generator'
+import { Injectable } from '@nestjs/common'
 
-export class CreateStudent {
+@Injectable()
+export class CreateStudentUseCase {
   constructor(
     private studentsRepository: IStudentsRepository,
     private hashGenerator: HashGenerator,
