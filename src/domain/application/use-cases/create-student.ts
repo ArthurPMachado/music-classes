@@ -6,9 +6,13 @@ import {
 } from './interfaces/ICreateStudentUseCase'
 import { left, right } from '@/core/either'
 import { StudentAlreadyExistsError } from './errors/student-already-exists-error'
+import { HashGenerator } from '../cryptography/hash-generator'
 
 export class CreateStudent {
-  constructor(private studentsRepository: IStudentsRepository) {}
+  constructor(
+    private studentsRepository: IStudentsRepository,
+    private hashGenerator: HashGenerator,
+  ) {}
 
   async execute({
     name,
@@ -22,10 +26,12 @@ export class CreateStudent {
       return left(new StudentAlreadyExistsError(email))
     }
 
+    const hashedPassword = await this.hashGenerator.hash(password)
+
     const student = Student.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     })
 
     await this.studentsRepository.create(student)
