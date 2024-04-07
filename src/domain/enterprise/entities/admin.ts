@@ -7,6 +7,7 @@ export class Admin extends Entity<IUserProps> {
     const admin = new Admin(
       {
         ...props,
+        createdAt: props.createdAt ?? new Date(),
         role: 'ADMIN',
       },
       id,
@@ -37,5 +38,13 @@ export class Admin extends Entity<IUserProps> {
 
   get role() {
     return this.props.role
+  }
+
+  get createdAt() {
+    return this.props.createdAt
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt
   }
 }
