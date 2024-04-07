@@ -25,6 +25,7 @@ model User {
   role      UserRole  @default(STUDENT)
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
+  hasAccess Boolean   @default(false) @map("has_access")
 
   @@map("users")
 }
