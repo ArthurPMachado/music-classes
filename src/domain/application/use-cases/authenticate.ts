@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { IStudentsRepository } from '../repositories/students-repository'
 import { HashComparer } from '../cryptography/hash-comparer'
 import { Encrypter } from '../cryptography/encrypter'
 import {
@@ -8,11 +7,12 @@ import {
 } from './interfaces/IAuthenticateUseCase'
 import { left, right } from '@/core/either'
 import { WrongCredentialsError } from './errors/wrong-credentials-error'
+import { IUsersRepository } from '../repositories/users-repository'
 
 @Injectable()
 export class AuthenticateUseCase {
   constructor(
-    private students: IStudentsRepository,
+    private usersRepository: IUsersRepository,
     private hashComparer: HashComparer,
     private encrypter: Encrypter,
   ) {}
@@ -21,15 +21,15 @@ export class AuthenticateUseCase {
     email,
     password,
   }: IAuthenticateUseCaseRequest): Promise<IAuthenticateUseCaseResponse> {
-    const student = await this.students.findByEmail(email)
+    const user = await this.usersRepository.findByEmail(email)
 
-    if (!student) {
+    if (!user) {
       return left(new WrongCredentialsError())
     }
 
     const isPasswordValid = await this.hashComparer.compare(
       password,
-      student.password,
+      user.password,
     )
 
     if (!isPasswordValid) {
@@ -37,7 +37,8 @@ export class AuthenticateUseCase {
     }
 
     const accessToken = await this.encrypter.encrypt({
-      sub: student.id.toString(),
+      sub: user.id.toString(),
+      role: user.role,
     })
 
     return right({
