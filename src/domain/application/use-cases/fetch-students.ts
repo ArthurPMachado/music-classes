@@ -11,7 +11,7 @@ export class FetchStudentsUseCase {
   async execute({
     page,
   }: IFetchStudentsUseCaseRequest): Promise<IFetchStudentsUseCaseResponse> {
-    const students = await this.studentsRepository.findMany(page)
+    const students = await this.studentsRepository.findMany({ page })
 
     return right({
       students,
