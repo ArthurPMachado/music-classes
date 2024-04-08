@@ -4,7 +4,9 @@ import {
   IFetchStudentsUseCaseRequest,
   IFetchStudentsUseCaseResponse,
 } from './interfaces/IFetchStudentsUseCase'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class FetchStudentsUseCase {
   constructor(private studentsRepository: IStudentsRepository) {}
 

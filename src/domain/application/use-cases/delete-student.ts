@@ -5,7 +5,9 @@ import {
   IDeleteStudentResponseUseCase,
 } from './interfaces/IDeleteStudentUseCase'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class DeleteStudentUseCase {
   constructor(private studentsRepository: IStudentsRepository) {}
 

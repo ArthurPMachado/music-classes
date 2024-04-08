@@ -1,6 +1,8 @@
+import { Injectable } from '@nestjs/common'
 import { IUsersRepository } from '../repositories/users-repository'
 import { IUsersMetricsResponse } from './interfaces/IUserMetricsResponse'
 
+@Injectable()
 export class GetUsersMetrics {
   constructor(private usersRepository: IUsersRepository) {}
 
