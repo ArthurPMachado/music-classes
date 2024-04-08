@@ -6,4 +6,6 @@ export abstract class IStudentsRepository extends IUsersRepository {
   abstract create(student: Student): Promise<void>
   abstract findByEmail(email: string): Promise<Student | null>
   abstract findMany({ page }: IPaginationParams): Promise<Student[]>
+  abstract findById(id: string): Promise<Student | null>
+  abstract delete(student: Student): Promise<void>
 }
