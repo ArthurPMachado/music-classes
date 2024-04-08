@@ -9,6 +9,7 @@ export class Student extends Entity<IUserProps> {
       {
         ...props,
         createdAt: props.createdAt ?? new Date(),
+        hasAccess: props.hasAccess ?? false,
       },
       id,
     )
@@ -46,5 +47,18 @@ export class Student extends Entity<IUserProps> {
 
   get updatedAt() {
     return this.props.updatedAt
+  }
+
+  get hasAccess() {
+    return this.props.hasAccess
+  }
+
+  set hasAccess(hasAccess: boolean) {
+    this.props.hasAccess = hasAccess
+    this.touch()
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date()
   }
 }

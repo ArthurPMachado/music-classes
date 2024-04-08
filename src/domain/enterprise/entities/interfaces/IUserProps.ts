@@ -10,4 +10,5 @@ export interface IUserProps {
   role?: string | null
   createdAt: Date
   updatedAt?: Date | null
+  hasAccess: boolean
 }

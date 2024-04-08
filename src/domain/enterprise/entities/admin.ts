@@ -1,6 +1,7 @@
 import { Entity } from '@/core/entities/entity'
 import { IUserProps } from './interfaces/IUserProps'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { Roles } from '@/core/enums/user-roles'
 
 export class Admin extends Entity<IUserProps> {
   static create(props: IUserProps, id?: UniqueEntityID) {
@@ -8,7 +9,8 @@ export class Admin extends Entity<IUserProps> {
       {
         ...props,
         createdAt: props.createdAt ?? new Date(),
-        role: 'ADMIN',
+        role: Roles.ADMIN,
+        hasAccess: true,
       },
       id,
     )
@@ -46,5 +48,18 @@ export class Admin extends Entity<IUserProps> {
 
   get updatedAt() {
     return this.props.updatedAt
+  }
+
+  get hasAccess() {
+    return this.props.hasAccess
+  }
+
+  set hasAccess(hasAccess: boolean) {
+    this.props.hasAccess = hasAccess
+    this.touch()
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date()
   }
 }
