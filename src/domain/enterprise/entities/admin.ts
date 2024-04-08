@@ -2,9 +2,13 @@ import { Entity } from '@/core/entities/entity'
 import { IUserProps } from './interfaces/IUserProps'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Roles } from '@/core/enums/user-roles'
+import { Optional } from '@/core/types/optional'
 
 export class Admin extends Entity<IUserProps> {
-  static create(props: IUserProps, id?: UniqueEntityID) {
+  static create(
+    props: Optional<IUserProps, 'createdAt' | 'hasAccess'>,
+    id?: UniqueEntityID,
+  ) {
     const admin = new Admin(
       {
         ...props,
@@ -22,8 +26,18 @@ export class Admin extends Entity<IUserProps> {
     return this.props.name
   }
 
+  set name(name: string) {
+    this.props.name = name
+    this.touch()
+  }
+
   get email() {
     return this.props.email
+  }
+
+  set email(email: string) {
+    this.props.email = email
+    this.touch()
   }
 
   get password() {
@@ -34,8 +48,18 @@ export class Admin extends Entity<IUserProps> {
     return this.props.phone
   }
 
+  set phone(phone: string) {
+    this.props.phone = phone
+    this.touch()
+  }
+
   get age() {
     return this.props.age
+  }
+
+  set age(age: number) {
+    this.props.age = age
+    this.touch()
   }
 
   get role() {

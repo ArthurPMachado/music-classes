@@ -4,7 +4,10 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
 export class Student extends Entity<IUserProps> {
-  static create(props: Optional<IUserProps, 'createdAt'>, id?: UniqueEntityID) {
+  static create(
+    props: Optional<IUserProps, 'createdAt' | 'hasAccess'>,
+    id?: UniqueEntityID,
+  ) {
     const student = new Student(
       {
         ...props,
@@ -21,8 +24,18 @@ export class Student extends Entity<IUserProps> {
     return this.props.name
   }
 
+  set name(name: string) {
+    this.props.name = name
+    this.touch()
+  }
+
   get email() {
     return this.props.email
+  }
+
+  set email(email: string) {
+    this.props.email = email
+    this.touch()
   }
 
   get password() {
@@ -33,8 +46,18 @@ export class Student extends Entity<IUserProps> {
     return this.props.phone
   }
 
+  set phone(phone: string) {
+    this.props.phone = phone
+    this.touch()
+  }
+
   get age() {
     return this.props.age
+  }
+
+  set age(age: number) {
+    this.props.age = age
+    this.touch()
   }
 
   get role() {
