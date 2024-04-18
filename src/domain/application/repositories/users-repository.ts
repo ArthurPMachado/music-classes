@@ -1,7 +1,8 @@
+import { Admin } from '@/domain/enterprise/entities/admin'
 import { IUserProps } from '@/domain/enterprise/entities/interfaces/IUserProps'
-import { User } from '@prisma/client'
+import { Student } from '@/domain/enterprise/entities/student'
 
 export abstract class IUsersRepository {
   abstract findByEmail(email: string): Promise<IUserProps | null>
-  abstract getTotalUsers(): Promise<User[]>
+  abstract getTotalUsers(): Promise<Student[] | Admin[]>
 }
