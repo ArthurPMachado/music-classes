@@ -28,7 +28,7 @@ export class InMemoryStudentsRepository implements IStudentsRepository {
 
   async findById(id: string) {
     const student = this.items.find(
-      (item) => item.id === new UniqueEntityID(id),
+      (item) => item.id.toString() === id,
     )
 
     if (!student) {
