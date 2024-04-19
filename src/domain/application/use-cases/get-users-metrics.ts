@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { IUsersRepository } from '../repositories/users-repository'
 import { IGetUsersMetricsUseCaseResponse } from './interfaces/IGetUsersMetricsUseCaseResponse'
+import { right } from '@/core/either'
 
 @Injectable()
 export class GetUsersMetricsUseCase {
@@ -13,9 +14,9 @@ export class GetUsersMetricsUseCase {
       (user) => user.hasAccess,
     ).length
 
-    return {
+    return right({
       totalUsers: totalUsers.length,
       totalUsersWithAccess,
-    }
+    })
   }
 }
