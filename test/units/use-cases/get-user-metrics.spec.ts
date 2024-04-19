@@ -1,4 +1,3 @@
-import { FetchStudentsUseCase } from '@/domain/application/use-cases/fetch-students'
 import { GetUsersMetricsUseCase } from '@/domain/application/use-cases/get-users-metrics'
 import { makeStudent } from 'test/factories/make-student'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'

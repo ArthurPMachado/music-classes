@@ -6,7 +6,7 @@ import {
   IUpdateStudentAccessUseCaseResponse,
 } from './interfaces/IUpdateStudentAccessUseCase'
 
-export class UpdateStudentPermissionUseCase {
+export class UpdateStudentAccessUseCase {
   constructor(private studentsRepository: IStudentsRepository) {}
 
   async execute({
