@@ -1,7 +1,10 @@
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { PrismaService } from '@/infra/prisma/prisma.service'
-import { GetDataById, getDataById } from '@/infra/http/schemas/get-data-by-id-schema'
+import {
+  GetDataById,
+  getDataById,
+} from '@/infra/http/schemas/get-data-by-id-schema'
 import {
   Controller,
   Delete,
