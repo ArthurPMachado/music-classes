@@ -7,7 +7,7 @@ let inMemoryStudentsRepository: InMemoryStudentsRepository
 
 let sut: GetUsersMetricsUseCase
 
-describe('Get Users Metrics Use Case', () => {
+describe('Get Users Metrics', () => {
   beforeEach(() => {
     inMemoryStudentsRepository = new InMemoryStudentsRepository()
 

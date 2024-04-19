@@ -6,7 +6,7 @@ let inMemoryStudentsRepository: InMemoryStudentsRepository
 
 let sut: FetchStudentsUseCase
 
-describe('Fetch Students Use Case', () => {
+describe('Fetch Students', () => {
   beforeEach(() => {
     inMemoryStudentsRepository = new InMemoryStudentsRepository()
 

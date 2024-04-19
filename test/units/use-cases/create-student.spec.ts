@@ -7,7 +7,7 @@ let fakeHasher: FakeHasher
 
 let sut: CreateStudentUseCase
 
-describe('Create Student Use Case', () => {
+describe('Create Student', () => {
   beforeEach(() => {
     inMemoryStudentsRepository = new InMemoryStudentsRepository()
     fakeHasher = new FakeHasher()
