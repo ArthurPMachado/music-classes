@@ -1,28 +1,16 @@
-import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
-import { PrismaService } from '@/infra/prisma/prisma.service'
-import { Controller, Get, UseGuards } from '@nestjs/common'
+import { GetUsersMetricsUseCase } from '@/domain/application/use-cases/get-users-metrics'
+import { Controller, Get } from '@nestjs/common'
 
-@Controller('/metrics')
-@UseGuards(JwtAuthGuard)
+@Controller('users/metrics')
 export class GetUsersMetricsController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private getUsersMetrics: GetUsersMetricsUseCase) {}
 
   @Get()
   async handle() {
-    const numberOfUsers = await this.prisma.user.count()
-    const numberOfUsersThatHavePermissions = await this.prisma.user.count({
-      where: {
-        has_permission: true,
-      },
-    })
-
-    const metrics = {
-      number_of_users: numberOfUsers,
-      number_of_users_that_have_permissions: numberOfUsersThatHavePermissions,
-    }
+    const result = await this.getUsersMetrics.execute()
 
     return {
-      metrics,
+      users: result.value,
     }
   }
 }

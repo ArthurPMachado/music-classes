@@ -14,9 +14,12 @@ export class GetUsersMetricsUseCase {
       (user) => user.hasAccess,
     ).length
 
+    const totalUsersWithoutAccess = totalUsers.length - totalUsersWithAccess
+
     return right({
       totalUsers: totalUsers.length,
       totalUsersWithAccess,
+      totalUsersWithoutAccess,
     })
   }
 }
