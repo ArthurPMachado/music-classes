@@ -17,7 +17,7 @@ import { StudentAlreadyExistsError } from '@/domain/application/use-cases/errors
 
 const bodyValidationPipe = new ZodValidationPipe(createAccountSchema)
 
-@Controller('/accounts')
+@Controller('/students')
 @Public()
 export class CreateAccountController {
   constructor(private createStudent: CreateStudentUseCase) {}
