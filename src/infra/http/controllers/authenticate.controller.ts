@@ -1,48 +1,47 @@
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { PrismaService } from '@/infra/prisma/prisma.service'
 import {
-  authenticateBodySchema,
-  AuthenticateBodySchema,
-} from '@/infra/http/schemas/authenticate-body-schema'
-import {
+  BadRequestException,
   Body,
   Controller,
   Post,
   UnauthorizedException,
-  UsePipes,
 } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
-import { compare } from 'bcryptjs'
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import {
+  authenticateBodySchema,
+  AuthenticateBodySchema,
+} from '@/infra/http/schemas/authenticate-body-schema'
+import { AuthenticateUseCase } from '@/domain/application/use-cases/authenticate'
+import { WrongCredentialsError } from '@/domain/application/use-cases/errors/wrong-credentials-error'
+import { Public } from '@/infra/auth/public'
+
+const bodyValidationPipe = new ZodValidationPipe(authenticateBodySchema)
 
 @Controller('/sessions')
+@Public()
 export class AuthenticateController {
-  constructor(
-    private prisma: PrismaService,
-    private jwt: JwtService,
-  ) {}
+  constructor(private authenticate: AuthenticateUseCase) {}
 
   @Post()
-  @UsePipes(new ZodValidationPipe(authenticateBodySchema))
-  async handle(@Body() body: AuthenticateBodySchema) {
+  async handle(@Body(bodyValidationPipe) body: AuthenticateBodySchema) {
     const { email, password } = body
 
-    const user = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
+    const result = await this.authenticate.execute({
+      email,
+      password,
     })
 
-    if (!user) {
-      throw new UnauthorizedException('User credentials do not match')
+    if (result.isLeft()) {
+      const error = result.value
+
+      switch (error.constructor) {
+        case WrongCredentialsError:
+          throw new UnauthorizedException(error.message)
+        default:
+          throw new BadRequestException(error.message)
+      }
     }
 
-    const isPasswordValid = await compare(password, user.password)
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('User credentials do not match')
-    }
-
-    const accessToken = this.jwt.sign({ sub: user.id })
+    const { accessToken } = result.value
 
     return {
       access_token: accessToken,
