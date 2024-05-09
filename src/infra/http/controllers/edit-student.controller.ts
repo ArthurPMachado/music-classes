@@ -9,14 +9,14 @@ import {
 } from '@nestjs/common'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import {
-  EditAccountBodySchema,
-  editAccountBodySchema,
-} from '@/infra/http/schemas/edit-account-body-schema'
+  editStudentBodySchema,
+  EditStudentBodySchema,
+} from '../schemas/edit-student-body-schema'
 import { GetDataById } from '@/infra/http/schemas/get-data-by-id-schema'
 import { EditStudentUseCase } from '@/domain/application/use-cases/edit-student'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 
-const bodyValidationPipe = new ZodValidationPipe(editAccountBodySchema)
+const bodyValidationPipe = new ZodValidationPipe(editStudentBodySchema)
 
 @Controller('/students')
 export class EditStudentController {
@@ -26,7 +26,7 @@ export class EditStudentController {
   @HttpCode(204)
   async handle(
     @Param('id') studentId: GetDataById,
-    @Body(bodyValidationPipe) body: EditAccountBodySchema,
+    @Body(bodyValidationPipe) body: EditStudentBodySchema,
   ) {
     const { name, email, phone, age } = body
 

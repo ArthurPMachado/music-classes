@@ -6,16 +6,16 @@ import {
   HttpCode,
   Post,
 } from '@nestjs/common'
-import {
-  CreateAccountSchema,
-  createAccountSchema,
-} from '@/infra/http/schemas/create-account-schema'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import {
+  CreateStudentSchema,
+  createStudentSchema,
+} from '../schemas/create-student-schema'
 import { Public } from '@/infra/auth/public'
 import { CreateStudentUseCase } from '@/domain/application/use-cases/create-student'
 import { StudentAlreadyExistsError } from '@/domain/application/use-cases/errors/student-already-exists-error'
 
-const bodyValidationPipe = new ZodValidationPipe(createAccountSchema)
+const bodyValidationPipe = new ZodValidationPipe(createStudentSchema)
 
 @Controller('/students')
 @Public()
@@ -24,7 +24,7 @@ export class CreateStudentController {
 
   @Post()
   @HttpCode(201)
-  async handle(@Body(bodyValidationPipe) body: CreateAccountSchema) {
+  async handle(@Body(bodyValidationPipe) body: CreateStudentSchema) {
     const { name, email, password } = body
 
     const result = await this.createStudent.execute({
