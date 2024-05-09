@@ -11,7 +11,7 @@ import { DeleteStudentUseCase } from '@/domain/application/use-cases/delete-stud
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 
 @Controller('/students')
-export class DeleteAccountController {
+export class DeleteStudentController {
   constructor(private deleteStudent: DeleteStudentUseCase) {}
 
   @Delete(':id')

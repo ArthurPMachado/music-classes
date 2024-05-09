@@ -1,29 +1,31 @@
-import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { PrismaService } from '@/infra/prisma/prisma.service'
 import {
   pageQueryParamSchema,
   PageQueryParamSchema,
 } from '@/infra/http/schemas/page-query-param-schema'
-import { Controller, Get, Query, UseGuards, UsePipes } from '@nestjs/common'
+import { FetchStudentsUseCase } from '@/domain/application/use-cases/fetch-students'
 
-@Controller('/accounts')
-@UseGuards(JwtAuthGuard)
-export class FetchAccountsController {
-  constructor(private prisma: PrismaService) {}
+const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema)
+
+@Controller('/students')
+export class FetchStudentsController {
+  constructor(private fetchStudents: FetchStudentsUseCase) {}
 
   @Get()
-  @UsePipes(new ZodValidationPipe(pageQueryParamSchema))
-  async handle(@Query('page') page: PageQueryParamSchema) {
-    const perPage = 20
-
-    const accounts = await this.prisma.user.findMany({
-      take: perPage,
-      skip: (page - 1) * perPage,
+  async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
+    const result = await this.fetchStudents.execute({
+      page,
     })
 
+    if (result.isLeft()) {
+      throw new BadRequestException()
+    }
+
+    const { students } = result.value
+
     return {
-      accounts,
+      students,
     }
   }
 }

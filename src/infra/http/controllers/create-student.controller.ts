@@ -19,7 +19,7 @@ const bodyValidationPipe = new ZodValidationPipe(createAccountSchema)
 
 @Controller('/students')
 @Public()
-export class CreateAccountController {
+export class CreateStudentController {
   constructor(private createStudent: CreateStudentUseCase) {}
 
   @Post()

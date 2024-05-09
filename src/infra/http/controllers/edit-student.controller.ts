@@ -19,7 +19,7 @@ import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 const bodyValidationPipe = new ZodValidationPipe(editAccountBodySchema)
 
 @Controller('/students')
-export class EditAccountDataController {
+export class EditStudentController {
   constructor(private editStudent: EditStudentUseCase) {}
 
   @Put(':id')
