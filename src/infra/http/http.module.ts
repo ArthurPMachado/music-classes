@@ -13,8 +13,10 @@ import { GetUsersMetricsUseCase } from '@/domain/application/use-cases/get-users
 import { EditStudentUseCase } from '@/domain/application/use-cases/edit-student'
 import { UpdateStudentAccessUseCase } from '@/domain/application/use-cases/update-student-access'
 import { DeleteStudentUseCase } from '@/domain/application/use-cases/delete-student'
+import { CryptographyModule } from '../cryptography/cryptography.module'
 
 @Module({
+  imports: [CryptographyModule],
   controllers: [
     AuthenticateController,
     CreateStudentController,
