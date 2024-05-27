@@ -19,7 +19,7 @@ import { JwtAuthGuard } from './jwt-auth.guard'
         const publicKey = config.get('JWT_PUBLIC_KEY', { infer: true })
 
         return {
-          signOptions: { algorithm: 'RS256' },
+          signOptions: { algorithm: 'RS256', expiresIn: '1m' },
           privateKey: Buffer.from(privateKey, 'base64'),
           publicKey: Buffer.from(publicKey, 'base64'),
         }
