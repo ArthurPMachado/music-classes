@@ -44,14 +44,13 @@ export class ForgotPassword {
     const payload = { email: user.email }
     const token = this.jwtService.sign(payload)
 
-    const baseUrl = this.envService.get('BASE_URL')
-    const resetPath = this.envService.get('RESET_PATH')
+    const resetUrl = this.envService.get('RESET_URL')
 
     const sendEmailProps = {
       name: user.name,
       email,
       templateContent,
-      url: `${baseUrl}${resetPath}?token=${token}`,
+      url: `${resetUrl}?token=${token}`,
     }
 
     try {
