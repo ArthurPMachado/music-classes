@@ -1,4 +1,5 @@
 interface ISendMailProps {
+  name: string
   email: string
   templateContent: string
   url: string

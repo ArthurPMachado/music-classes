@@ -48,6 +48,7 @@ export class ForgotPassword {
     const resetPath = this.envService.get('RESET_PATH')
 
     const sendEmailProps = {
+      name: user.name,
       email,
       templateContent,
       url: `${baseUrl}${resetPath}?token=${token}`,
