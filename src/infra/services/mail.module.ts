@@ -1,6 +1,5 @@
 import { MailerModule } from '@nestjs-modules/mailer'
 import { Module } from '@nestjs/common'
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter'
 import { ConfigService } from '@nestjs/config'
 import { Env } from '../env/env'
 
@@ -21,13 +20,6 @@ import { Env } from '../env/env'
         },
         defaults: {
           from: config.get('SMTP_USERNAME', { infer: true }),
-        },
-        template: {
-          dir: process.cwd() + '/src/infra/templates/email',
-          adapter: new HandlebarsAdapter(),
-          options: {
-            strict: true,
-          },
         },
       }),
     }),
