@@ -1,4 +1,4 @@
-interface ISendMailProps {
+export interface ISendMailProps {
   name: string
   email: string
   templateContent: string

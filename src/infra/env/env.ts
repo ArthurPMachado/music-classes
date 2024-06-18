@@ -7,6 +7,10 @@ export const envSchema = z.object({
   JWT_PUBLIC_KEY: z.string(),
   BASE_URL: z.string().url(),
   RESET_URL: z.string().url(),
+  SMTP_HOST: z.string(),
+  SMTP_PORT: z.coerce.number().default(587),
+  SMTP_USERNAME: z.string(),
+  SMTP_PASSWORD: z.string(),
 })
 
 export type Env = z.infer<typeof envSchema>

@@ -32,8 +32,9 @@ export class ForgotPassword {
     }
 
     const templatePath = resolve(
-      __dirname,
-      '..',
+      process.cwd(),
+      'src',
+      'infra',
       'templates',
       'email',
       'forgotPassword.hbs',
