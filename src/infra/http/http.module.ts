@@ -15,6 +15,8 @@ import { UpdateStudentAccessUseCase } from '@/domain/application/use-cases/updat
 import { DeleteStudentUseCase } from '@/domain/application/use-cases/delete-student'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/prisma/database.module'
+import { ForgotPasswordController } from './controllers/forgot-password.controller'
+import { ForgotPasswordUseCase } from '@/domain/application/use-cases/forgot-password'
 
 @Module({
   imports: [CryptographyModule, DatabaseModule],
@@ -26,6 +28,7 @@ import { DatabaseModule } from '../database/prisma/database.module'
     EditStudentController,
     UpdateStudentAccessController,
     DeleteStudentController,
+    ForgotPasswordController,
   ],
   providers: [
     AuthenticateUseCase,
@@ -35,6 +38,7 @@ import { DatabaseModule } from '../database/prisma/database.module'
     EditStudentUseCase,
     UpdateStudentAccessUseCase,
     DeleteStudentUseCase,
+    ForgotPasswordUseCase,
   ],
 })
 export class HttpModule {}

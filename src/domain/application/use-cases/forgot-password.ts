@@ -14,7 +14,7 @@ import { JwtService } from '@nestjs/jwt'
 import { EnvService } from '@/infra/env/env.service'
 
 @Injectable()
-export class ForgotPassword {
+export class ForgotPasswordUseCase {
   constructor(
     private usersRepository: IUsersRepository,
     private mailRepository: IMailRepository,
