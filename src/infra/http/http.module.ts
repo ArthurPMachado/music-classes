@@ -14,9 +14,10 @@ import { EditStudentUseCase } from '@/domain/application/use-cases/edit-student'
 import { UpdateStudentAccessUseCase } from '@/domain/application/use-cases/update-student-access'
 import { DeleteStudentUseCase } from '@/domain/application/use-cases/delete-student'
 import { CryptographyModule } from '../cryptography/cryptography.module'
+import { DatabaseModule } from '../database/prisma/database.module'
 
 @Module({
-  imports: [CryptographyModule],
+  imports: [CryptographyModule, DatabaseModule],
   controllers: [
     AuthenticateController,
     CreateStudentController,
