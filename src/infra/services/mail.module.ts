@@ -2,6 +2,9 @@ import { MailerModule } from '@nestjs-modules/mailer'
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { Env } from '../env/env'
+import { MailService } from './mail.service'
+import { IMailRepository } from '@/domain/application/repositories/mail-repository'
+import { EnvService } from '../env/env.service'
 
 @Module({
   imports: [
@@ -10,7 +13,7 @@ import { Env } from '../env/env'
       useFactory: (config: ConfigService<Env, true>) => ({
         transport: {
           host: config.get('SMTP_HOST', { infer: true }),
-          port: config.get('PORT', { infer: true }),
+          port: config.get('SMTP_PORT', { infer: true }),
           ignoreTLS: true,
           secure: false,
           auth: {
@@ -18,11 +21,16 @@ import { Env } from '../env/env'
             pass: config.get('SMTP_PASSWORD', { infer: true }),
           },
         },
-        defaults: {
-          from: config.get('SMTP_USERNAME', { infer: true }),
-        },
       }),
     }),
   ],
+  providers: [
+    EnvService,
+    {
+      provide: IMailRepository,
+      useClass: MailService,
+    },
+  ],
+  exports: [IMailRepository],
 })
 export class MailModule {}

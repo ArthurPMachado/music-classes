@@ -17,9 +17,11 @@ import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/prisma/database.module'
 import { ForgotPasswordController } from './controllers/forgot-password.controller'
 import { ForgotPasswordUseCase } from '@/domain/application/use-cases/forgot-password'
+import { MailModule } from '../services/mail.module'
+import { EnvService } from '../env/env.service'
 
 @Module({
-  imports: [CryptographyModule, DatabaseModule],
+  imports: [CryptographyModule, DatabaseModule, MailModule],
   controllers: [
     AuthenticateController,
     CreateStudentController,
@@ -31,6 +33,7 @@ import { ForgotPasswordUseCase } from '@/domain/application/use-cases/forgot-pas
     ForgotPasswordController,
   ],
   providers: [
+    EnvService,
     AuthenticateUseCase,
     CreateStudentUseCase,
     FetchStudentsUseCase,
