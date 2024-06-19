@@ -8,7 +8,7 @@ import {
 import { IUsersRepository } from '../repositories/users-repository'
 import { IMailRepository } from '../repositories/mail-repository'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { left } from '@/core/either'
+import { left, right } from '@/core/either'
 import { ForgotPasswordMailNotSentError } from './errors/forgot-password-mail-not-sent-error'
 import { JwtService } from '@nestjs/jwt'
 import { EnvService } from '@/infra/env/env.service'
@@ -37,7 +37,7 @@ export class ForgotPasswordUseCase {
       'infra',
       'templates',
       'email',
-      'forgotPassword.hbs',
+      'forgot-password.hbs',
     )
 
     const templateContent = readFileSync(templatePath).toString('utf-8')
@@ -56,7 +56,10 @@ export class ForgotPasswordUseCase {
 
     try {
       await this.mailRepository.sendMail(sendEmailProps)
+      return right(null)
     } catch (error) {
+      console.log('ERROR')
+      console.log(error)
       return left(new ForgotPasswordMailNotSentError())
     }
   }

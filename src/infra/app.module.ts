@@ -4,7 +4,6 @@ import { envSchema } from './env/env'
 import { AuthModule } from './auth/auth.module'
 import { HttpModule } from './http/http.module'
 import { EnvModule } from './env/env.module'
-import { MailModule } from './services/mail.module'
 
 @Module({
   imports: [
@@ -15,7 +14,6 @@ import { MailModule } from './services/mail.module'
     AuthModule,
     HttpModule,
     EnvModule,
-    MailModule,
   ],
 })
 export class AppModule {}
