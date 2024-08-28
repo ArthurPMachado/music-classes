@@ -1,13 +1,22 @@
 import { Either } from '@/core/either'
-import { Student } from '@/domain/enterprise/entities/student'
 
 export interface IFetchStudentsUseCaseRequest {
   page: number
 }
 
+interface IStudents {
+  id: string
+  name: string
+  email: string
+  age: number
+  phone: string
+  createdAt: Date
+  updatedAt: Date
+}
+
 export type IFetchStudentsUseCaseResponse = Either<
   null,
   {
-    students: Student[]
+    studentsResponse: IStudents[]
   }
 >

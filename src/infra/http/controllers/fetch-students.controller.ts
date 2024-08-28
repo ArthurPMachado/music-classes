@@ -40,10 +40,10 @@ export class FetchStudentsController {
       throw new BadRequestException()
     }
 
-    const { students } = result.value
+    const { studentsResponse } = result.value
 
     return {
-      students,
+      studentsResponse,
     }
   }
 }
