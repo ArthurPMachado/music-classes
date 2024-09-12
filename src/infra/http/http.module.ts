@@ -19,10 +19,12 @@ import { ForgotPasswordController } from './controllers/forgot-password.controll
 import { ForgotPasswordUseCase } from '@/domain/application/use-cases/forgot-password'
 import { MailModule } from '../services/mail.module'
 import { EnvService } from '../env/env.service'
+import { HealthController } from './controllers/health.controller'
 
 @Module({
   imports: [CryptographyModule, DatabaseModule, MailModule],
   controllers: [
+    HealthController,
     AuthenticateController,
     CreateStudentController,
     FetchStudentsController,
