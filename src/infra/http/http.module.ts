@@ -20,6 +20,8 @@ import { ForgotPasswordUseCase } from '@/domain/application/use-cases/forgot-pas
 import { MailModule } from '../services/mail.module'
 import { EnvService } from '../env/env.service'
 import { HealthController } from './controllers/health.controller'
+import { ResetPasswordController } from './controllers/reset-password.controller'
+import { ResetPasswordUseCase } from '@/domain/application/use-cases/reset-password'
 
 @Module({
   imports: [CryptographyModule, DatabaseModule, MailModule],
@@ -33,6 +35,7 @@ import { HealthController } from './controllers/health.controller'
     UpdateStudentAccessController,
     DeleteStudentController,
     ForgotPasswordController,
+    ResetPasswordController,
   ],
   providers: [
     EnvService,
@@ -44,6 +47,7 @@ import { HealthController } from './controllers/health.controller'
     UpdateStudentAccessUseCase,
     DeleteStudentUseCase,
     ForgotPasswordUseCase,
+    ResetPasswordUseCase,
   ],
 })
 export class HttpModule {}

@@ -12,9 +12,10 @@ import { left, right } from '@/core/either'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { SamePasswordError } from './errors/same-password-error'
 import { Student } from '@/domain/enterprise/entities/student'
+import { TokenExpiredError } from '@/core/errors/token-expired-error'
 
 @Injectable()
-export class ResetPassword {
+export class ResetPasswordUseCase {
   constructor(
     private studentsRepository: IStudentsRepository,
     private encrypter: Encrypter,
@@ -26,7 +27,13 @@ export class ResetPassword {
     token,
     password,
   }: IResetPasswordUseCaseRequest): Promise<IResetPasswordUseCaseResponse> {
-    const decoded = await this.encrypter.verify<IJwtResetPassword>(token)
+    let decoded
+
+    try {
+      decoded = await this.encrypter.verify<IJwtResetPassword>(token)
+    } catch (error) {
+      return left(new TokenExpiredError())
+    }
 
     const student = await this.studentsRepository.findByEmail(decoded.email)
 

@@ -4,6 +4,7 @@ import { Encrypter } from '@/domain/application/cryptography/encrypter'
 import { HashGenerator } from '@/domain/application/cryptography/hash-generator'
 import { BcryptHasher } from './bcrypt-hasher'
 import { HashComparer } from '@/domain/application/cryptography/hash-comparer'
+import { EnvService } from '../env/env.service'
 
 @Module({
   providers: [
@@ -19,6 +20,7 @@ import { HashComparer } from '@/domain/application/cryptography/hash-comparer'
       provide: HashComparer,
       useClass: BcryptHasher,
     },
+    EnvService,
   ],
   exports: [Encrypter, HashGenerator, HashComparer],
 })
