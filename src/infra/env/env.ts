@@ -11,6 +11,7 @@ export const envSchema = z.object({
   SMTP_PORT: z.coerce.number().default(587),
   SMTP_USERNAME: z.string(),
   SMTP_PASSWORD: z.string(),
+  HASH_SALT: z.coerce.number().default(14),
 })
 
 export type Env = z.infer<typeof envSchema>

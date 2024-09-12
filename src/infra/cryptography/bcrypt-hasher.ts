@@ -2,13 +2,16 @@ import { Injectable } from '@nestjs/common'
 import { compare, hash } from 'bcryptjs'
 import { HashComparer } from '@/domain/application/cryptography/hash-comparer'
 import { HashGenerator } from '@/domain/application/cryptography/hash-generator'
+import { EnvService } from '../env/env.service'
 
 @Injectable()
 export class BcryptHasher implements HashGenerator, HashComparer {
-  private HASH_SALT_LENGTH = 14
+  constructor(private envService: EnvService) {}
 
   async hash(plain: string): Promise<string> {
-    return hash(plain, this.HASH_SALT_LENGTH)
+    const salt = this.envService.get('HASH_SALT')
+
+    return hash(plain, salt)
   }
 
   async compare(plain: string, hash: string): Promise<boolean> {

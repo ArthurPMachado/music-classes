@@ -11,4 +11,10 @@ export class JwtEncrypter implements Encrypter {
 
     return encrypted
   }
+
+  async verify<T>(token: string): Promise<T> {
+    const decoded = await this.jwtService.verifyAsync(token)
+
+    return decoded
+  }
 }
